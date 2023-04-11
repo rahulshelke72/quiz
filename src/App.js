@@ -1,5 +1,6 @@
 import React , {useState} from 'react';
-import './App.css'
+
+
 export default function App() {
 
   const questions = [
@@ -40,31 +41,34 @@ export default function App() {
       ],
     }
   ]
+
    const [currentQuestion , setCurrentQuestion] = useState(0);
+
+   const [showScore , setShowScore] = useState(false);
 
    const handleAnswerButtonClick = () =>{
     const nextQuestion = currentQuestion + 1;
     if(currentQuestion < questions.length){
       setCurrentQuestion(nextQuestion);
     }else{
-      alert('you have reached the end of quiz!');
+      setShowScore(true);
     }
     
-   }
+   };
   return (
    <div className='app'>
     {/*HINT : replace "false" with logic to display the score when the user has answered all the 
     questions */}
-    {false ? (  <div className='score-section'>You scored 1 out of {questions.length} </div> )
+    {showScore ? (  <div className='score-section'>You scored 1 out of {questions.length} </div> )
     :(
       <>
         <div className='question-section'>
           <div className='question-text'>{questions[currentQuestion].questionText} </div>
         </div>
         <div className='answer-section'>
-           {questions[currentQuestion].answerOptions.map((answerOptions)=>{
+           {questions[currentQuestion].answerOptions.map((answerOptions) => (
             <button onClick={handleAnswerButtonClick}>{answerOptions.answerText}</button>
-           })}
+    ))}
         </div>
       </>
     )
